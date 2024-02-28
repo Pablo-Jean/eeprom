@@ -46,13 +46,22 @@ typedef eeprom_e (*ee_read_fxn)(uint32_t i2cAddress, uint32_t memAddress, uint8_
 typedef void (*delay_ms)(uint32_t ms);
 
 typedef struct{
+	/* The size, in bytes, of your EEPROM Memory */
 	uint32_t memSize;
+	/* The page size of your EEPROM, this info, you will find in
+	 * the Datasheet */
 	uint32_t pageSize;
+	/* The size of internal eeprom address sended over
+	 * I2C interface */
 	uint8_t memAddrSize;
+	/* The base address of your EEPROM memory */
 	uint8_t i2cAddress;
 
+	/* The function that writes into the EEPROM over i2C */
 	ee_write_fxn EeWriteFxn;
+	/* The function that reads into the EEPROM over I2C */
 	ee_read_fxn EeReadFxn;
+	/* The delay function, in milliseconds */
 	delay_ms DelayMs;
 	struct{
 		uint32_t actAddress;
